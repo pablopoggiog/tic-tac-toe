@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  FacebookIcon,
+  TwitterIcon,
+} from "react-share";
 import { Board } from "..";
 import { SquaresState, Turn, initialState, checkWinner } from "../../utils";
-import { Container, ButtonsContainer, Button, Animation } from "./styles";
+import { Container, SocialMediaContainer, Button, Animation } from "./styles";
 
 export const Game = () => {
   const [turn, setTurn] = useState<Turn>("X");
@@ -63,10 +69,31 @@ export const Game = () => {
       </Animation>
       <Board handleClick={handleClick} squares={squares} />
 
-      <ButtonsContainer>
-        <Button onClick={resetGame}>New Game</Button>
-        <Button>Share Results</Button>
-      </ButtonsContainer>
+      <Button onClick={resetGame}>New Game</Button>
+
+      {/* in this 2 buttons, the idea passing as url the actual url of the deployed app, once that's done (instead of the google placeholder) */}
+      <SocialMediaContainer>
+        {/*
+            // @ts-ignore: https://github.com/nygardk/react-share/issues/277 */}
+        <FacebookShareButton
+          url="www.google.com"
+          quote="This is a pretty good game, check it out!"
+        >
+          {/*
+              // @ts-ignore: https://github.com/nygardk/react-share/issues/277 */}
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        {/*
+            // @ts-ignore: https://github.com/nygardk/react-share/issues/277 */}
+        <TwitterShareButton
+          url="www.google.com"
+          title="This is a pretty good game, check it out!"
+        >
+          {/*
+              // @ts-ignore: https://github.com/nygardk/react-share/issues/277 */}
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
+      </SocialMediaContainer>
     </Container>
   );
 };
