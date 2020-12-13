@@ -15,7 +15,7 @@ export const InnerContainer = styled.div`
   justify-self: center;
   padding-top: 1em;
 
-  @media (orientation: landscape) {
+  @media (min-aspect-ratio: 3/4) {
     width: 60vh;
     height: 60vh;
   }
@@ -32,12 +32,21 @@ const rotate = keyframes`
 `;
 
 interface SquareProps {
-  turn: boolean;
+  flip: boolean;
 }
 
 export const Square = styled.div<SquareProps>`
   display: flex;
   background: linear-gradient(to right, #4a00e0, #8e2de2);
-  animation: ${({ turn }) => (turn ? css`2s ${rotate} 1` : "")};
+  animation: ${({ flip }) => (flip ? css`2s ${rotate} 1` : "")};
   border-radius: 1em;
+  align-items: center;
+  justify-content: center;
+
+  & > p {
+    font-size: 40px;
+    margin: 0;
+    font-weight: 600;
+    color: white;
+  }
 `;

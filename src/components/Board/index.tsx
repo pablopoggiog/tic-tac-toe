@@ -1,23 +1,32 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
 import { Container, InnerContainer, Square } from "./styles";
+import { SquaresState } from "../../utils";
 
-export const Board: FunctionComponent = () => {
-  const [turn, setTurn] = useState<boolean>(false);
+interface BoardProps {
+  handleClick: (index: number) => void;
+  squares: SquaresState;
+}
 
-  const takeATurn = () => {
-    setTurn(true);
-    setTimeout(() => setTurn(false), 2000);
-  };
-
+export const Board: FunctionComponent<BoardProps> = ({
+  handleClick,
+  squares,
+}) => {
   return (
-    <Container>
-      <InnerContainer>
-        {Array(9)
-          .fill(null)
-          .map((_) => (
-            <Square onClick={takeATurn} turn={turn} />
-          ))}
-      </InnerContainer>
-    </Container>
+    <>
+      <Container>
+        <InnerContainer>
+          {Array(9)
+            .fill(null)
+            .map((_, index) => (
+              <Square
+                onClick={() => handleClick(index)}
+                flip={squares[index].flip}
+              >
+                <p>{squares[index].selected}</p>
+              </Square>
+            ))}
+        </InnerContainer>
+      </Container>
+    </>
   );
 };
