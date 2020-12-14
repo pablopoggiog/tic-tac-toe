@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -10,12 +10,21 @@ import { SquaresState, Turn, initialState, checkWinner } from "../../utils";
 import { Container, SocialMediaContainer, Button, Animation } from "./styles";
 
 export const Game = () => {
-  const [turn, setTurn] = useState<Turn>("X");
+  const [turn, setTurn] = useState<number>(0);
   const [winner, setWinner] = useState<Turn>(null);
   const [animation, setAnimation] = useState<string | null>(null);
   const [squares, setSquares] = useState<SquaresState>(
     JSON.parse(JSON.stringify(initialState)) // i have to use these 2 JSON methods to pass a full new objet as initial state,
   ); // otherwise because of the nesting levels it'll have weird behaviours muting initialState const value during the app usage
+
+  useEffect(() => {
+    if (turn === 9) {
+      setAnimation("tie");
+      setTimeout(() => {
+        setAnimation(null);
+      }, 4500);
+    }
+  }, [turn]);
 
   const resetGame = () => {
     setAnimation("reset");
@@ -23,7 +32,7 @@ export const Game = () => {
       setAnimation(null);
     }, 4500);
     setWinner(null);
-    setTurn("X");
+    setTurn(0);
     setTimeout(() => {
       setSquares(JSON.parse(JSON.stringify(initialState)));
     }, 2200);
@@ -31,10 +40,10 @@ export const Game = () => {
 
   const playSquare = (index: number) => {
     if (!squares[index].selected) {
-      setTurn(turn === "X" ? "O" : "X");
+      setTurn(turn + 1);
       const newSquares = { ...squares };
       newSquares[index].flip = true;
-      newSquares[index].selected = turn;
+      newSquares[index].selected = turn % 2 ? "X" : "O";
       setSquares({ ...newSquares });
       setTimeout(() => {
         newSquares[index].flip = false;
@@ -44,8 +53,6 @@ export const Game = () => {
   };
 
   const handleClick = (index: number) => {
-    !winner && playSquare(index);
-
     const someoneWon = checkWinner(squares);
     if (someoneWon && !winner) {
       setWinner(someoneWon);
@@ -54,6 +61,8 @@ export const Game = () => {
         setAnimation(null);
       }, 4500);
     }
+
+    !winner && playSquare(index);
   };
 
   return (
@@ -62,6 +71,8 @@ export const Game = () => {
         <span>🎈</span>
         {animation === "winner" ? (
           <p> PLAYER {winner} WON </p>
+        ) : animation === "tie" ? (
+          <p> GAME TIED! </p>
         ) : (
           <p> LET'S PLAY! </p>
         )}
