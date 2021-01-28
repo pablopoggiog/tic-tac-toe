@@ -19,6 +19,7 @@ export const Board: FunctionComponent<BoardProps> = ({
             .fill(null)
             .map((_, index) => (
               <Square
+                key={index}
                 onClick={() => handleClick(index)}
                 flip={squares[index].flip}
               >

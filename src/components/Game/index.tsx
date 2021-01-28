@@ -26,16 +26,6 @@ export const Game = () => {
     JSON.parse(JSON.stringify(initialState)) // i have to use these 2 JSON methods to pass a full new objet as initial state,
   ); // otherwise because of the nesting levels it'll have weird behaviours muting initialState const value during the app usage
 
-  useEffect(() => {
-    if (turn === 9) {
-      setAnimation("tie");
-
-      setTimeout(() => {
-        setAnimation("");
-      }, 4500);
-    }
-  }, [turn]);
-
   const resetGame = () => {
     setAnimation("reset");
 
@@ -73,10 +63,13 @@ export const Game = () => {
   };
 
   const handleClick = (index: number) => {
+    !winner && playSquare(index);
+
     const someoneWon = checkWinner(squares);
 
-    if (someoneWon && !winner) {
+    if (someoneWon) {
       setWinner(someoneWon);
+      console.log("GANO " + winner);
 
       setAnimation("winner");
 
@@ -85,7 +78,13 @@ export const Game = () => {
       }, 4500);
     }
 
-    !winner && playSquare(index);
+    if (turn === 9) {
+      setAnimation("tie");
+
+      setTimeout(() => {
+        setAnimation("");
+      }, 4500);
+    }
   };
 
   return (
