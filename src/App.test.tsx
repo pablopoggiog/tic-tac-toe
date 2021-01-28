@@ -7,3 +7,5 @@ test("renders New Game button", () => {
   const newGameButton = screen.getByText("New Game");
   expect(newGameButton).toBeInTheDocument();
 });
+
+// To do: tests
