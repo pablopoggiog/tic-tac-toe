@@ -101,3 +101,5 @@ export const Button = styled.button`
     opacity: 1;
   }
 `;
+
+export const Icon = styled.span``;

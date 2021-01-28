@@ -7,12 +7,21 @@ import {
 } from "react-share";
 import { Board } from "..";
 import { SquaresState, Turn, initialState, checkWinner } from "../../lib";
-import { Container, SocialMediaContainer, Button, Animation } from "./styles";
+import {
+  Container,
+  SocialMediaContainer,
+  Button,
+  Animation,
+  Icon,
+} from "./styles";
 
 export const Game = () => {
   const [turn, setTurn] = useState<number>(0);
+
   const [winner, setWinner] = useState<Turn>(null);
+
   const [animation, setAnimation] = useState<string | null>(null);
+
   const [squares, setSquares] = useState<SquaresState>(
     JSON.parse(JSON.stringify(initialState)) // i have to use these 2 JSON methods to pass a full new objet as initial state,
   ); // otherwise because of the nesting levels it'll have weird behaviours muting initialState const value during the app usage
@@ -20,6 +29,7 @@ export const Game = () => {
   useEffect(() => {
     if (turn === 9) {
       setAnimation("tie");
+
       setTimeout(() => {
         setAnimation(null);
       }, 4500);
@@ -28,11 +38,15 @@ export const Game = () => {
 
   const resetGame = () => {
     setAnimation("reset");
+
     setTimeout(() => {
       setAnimation(null);
     }, 4500);
+
     setWinner(null);
+
     setTurn(0);
+
     setTimeout(() => {
       setSquares(JSON.parse(JSON.stringify(initialState)));
     }, 2200);
@@ -41,12 +55,18 @@ export const Game = () => {
   const playSquare = (index: number) => {
     if (!squares[index].selected) {
       setTurn(turn + 1);
+
       const newSquares = { ...squares };
+
       newSquares[index].flip = true;
+
       newSquares[index].selected = turn % 2 ? "X" : "O";
+
       setSquares({ ...newSquares });
+
       setTimeout(() => {
         newSquares[index].flip = false;
+
         setSquares({ ...newSquares });
       }, 2000);
     }
@@ -54,9 +74,12 @@ export const Game = () => {
 
   const handleClick = (index: number) => {
     const someoneWon = checkWinner(squares);
+
     if (someoneWon && !winner) {
       setWinner(someoneWon);
+
       setAnimation("winner");
+
       setTimeout(() => {
         setAnimation(null);
       }, 4500);
@@ -68,7 +91,7 @@ export const Game = () => {
   return (
     <Container>
       <Animation active={!!animation}>
-        <span>🎈</span>
+        <Icon>🎈</Icon>
         {animation === "winner" ? (
           <p> PLAYER {winner} WON </p>
         ) : animation === "tie" ? (
@@ -76,32 +99,23 @@ export const Game = () => {
         ) : (
           <p> LET'S PLAY! </p>
         )}
-        <span>🥳</span>
+        <Icon>🥳</Icon>
       </Animation>
       <Board handleClick={handleClick} squares={squares} />
 
       <Button onClick={resetGame}>New Game</Button>
 
-      {/* in this 2 buttons, the idea passing as url the actual url of the deployed app, once that's done (instead of the google placeholder) */}
       <SocialMediaContainer>
-        {/*
-            // @ts-ignore: https://github.com/nygardk/react-share/issues/277 */}
         <FacebookShareButton
-          url="www.google.com"
+          url="https://pablopoggiog.github.io/tic-tac-toe"
           quote="This is a pretty good game, check it out!"
         >
-          {/*
-              // @ts-ignore: https://github.com/nygardk/react-share/issues/277 */}
           <FacebookIcon size={32} round />
         </FacebookShareButton>
-        {/*
-            // @ts-ignore: https://github.com/nygardk/react-share/issues/277 */}
         <TwitterShareButton
-          url="www.google.com"
+          url="https://pablopoggiog.github.io/tic-tac-toe"
           title="This is a pretty good game, check it out!"
         >
-          {/*
-              // @ts-ignore: https://github.com/nygardk/react-share/issues/277 */}
           <TwitterIcon size={32} round />
         </TwitterShareButton>
       </SocialMediaContainer>
