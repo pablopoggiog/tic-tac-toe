@@ -6,7 +6,7 @@ import {
   TwitterIcon,
 } from "react-share";
 import { Board } from "..";
-import { SquaresState, Turn, initialState, checkWinner } from "../../utils";
+import { SquaresState, Turn, initialState, checkWinner } from "../../lib";
 import { Container, SocialMediaContainer, Button, Animation } from "./styles";
 
 export const Game = () => {

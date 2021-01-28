@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Container, InnerContainer, Square } from "./styles";
-import { SquaresState } from "../../utils";
+import { SquaresState } from "../../lib";
 
 interface BoardProps {
   handleClick: (index: number) => void;
