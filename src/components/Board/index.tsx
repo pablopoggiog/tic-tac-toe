@@ -5,11 +5,13 @@ import { SquaresState } from "../../lib";
 interface BoardProps {
   handleClick: (index: number) => void;
   squares: SquaresState;
+  disabled: boolean;
 }
 
 export const Board: FunctionComponent<BoardProps> = ({
   handleClick,
   squares,
+  disabled,
 }) => {
   return (
     <>
@@ -22,6 +24,7 @@ export const Board: FunctionComponent<BoardProps> = ({
                 key={index}
                 onClick={() => handleClick(index)}
                 flip={squares[index].flip}
+                disabled={disabled}
               >
                 <p>{squares[index].selected}</p>
               </Square>

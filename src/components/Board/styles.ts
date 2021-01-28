@@ -35,13 +35,18 @@ interface SquareProps {
   flip: boolean;
 }
 
-export const Square = styled.div<SquareProps>`
+export const Square = styled.button<SquareProps>`
   display: flex;
   background: linear-gradient(to right, #4a00e0, #8e2de2);
   animation: ${({ flip }) => (flip ? css`2s ${rotate} 1` : "")};
   border-radius: 1em;
   align-items: center;
   justify-content: center;
+  border: none;
+
+  &:focus {
+    outline: 0;
+  }
 
   & > p {
     font-size: 40px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -25,22 +25,6 @@ export const Game = () => {
   const [squares, setSquares] = useState<SquaresState>(
     JSON.parse(JSON.stringify(initialState)) // i have to use these 2 JSON methods to pass a full new objet as initial state,
   ); // otherwise because of the nesting levels it'll have weird behaviours muting initialState const value during the app usage
-
-  const resetGame = () => {
-    setAnimation("reset");
-
-    setTimeout(() => {
-      setAnimation("");
-    }, 4500);
-
-    setWinner(null);
-
-    setTurn(0);
-
-    setTimeout(() => {
-      setSquares(JSON.parse(JSON.stringify(initialState)));
-    }, 2200);
-  };
 
   const playSquare = (index: number) => {
     if (!squares[index].selected) {
@@ -69,7 +53,6 @@ export const Game = () => {
 
     if (someoneWon) {
       setWinner(someoneWon);
-      console.log("GANO " + winner);
 
       setAnimation("winner");
 
@@ -87,6 +70,22 @@ export const Game = () => {
     }
   };
 
+  const resetGame = () => {
+    setAnimation("reset");
+
+    setTimeout(() => {
+      setAnimation("");
+    }, 4500);
+
+    setWinner(null);
+
+    setTurn(0);
+
+    setTimeout(() => {
+      setSquares(JSON.parse(JSON.stringify(initialState)));
+    }, 2200);
+  };
+
   return (
     <Container>
       <Animation active={!!animation}>
@@ -100,7 +99,7 @@ export const Game = () => {
         )}
         <Icon>🥳</Icon>
       </Animation>
-      <Board handleClick={handleClick} squares={squares} />
+      <Board handleClick={handleClick} disabled={!!winner} squares={squares} />
 
       <Button onClick={resetGame}>New Game</Button>
 
