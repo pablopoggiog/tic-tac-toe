@@ -16,8 +16,8 @@ export const InnerContainer = styled.div`
   padding-top: 1em;
 
   @media (min-aspect-ratio: 3/4) {
-    width: 60vh;
-    height: 60vh;
+    width: 50vh;
+    height: 50vh;
   }
 `;
 
@@ -52,6 +52,6 @@ export const Square = styled.button<SquareProps>`
     font-size: 40px;
     margin: 0;
     font-weight: 600;
-    color: white;
+    color: ${({ theme }) => theme.body};
   }
 `;

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, FunctionComponent } from "react";
 import {
   FacebookShareButton,
   TwitterShareButton,
   FacebookIcon,
   TwitterIcon,
 } from "react-share";
-import { Board } from "..";
+import { Board, Toggler } from "..";
 import { SquaresState, Turn, initialState, checkWinner } from "../../lib";
 import {
   Container,
@@ -15,7 +15,11 @@ import {
   Icon,
 } from "./styles";
 
-export const Game = () => {
+interface GameProps {
+  toggleTheme: () => void;
+}
+
+export const Game: FunctionComponent<GameProps> = ({ toggleTheme }) => {
   const [turn, setTurn] = useState<number>(0);
 
   const [winner, setWinner] = useState<Turn>(null);
@@ -88,6 +92,7 @@ export const Game = () => {
 
   return (
     <Container>
+      <Toggler toggleTheme={toggleTheme} />
       <Animation active={!!animation}>
         <Icon>🎈</Icon>
         {animation === "winner" ? (

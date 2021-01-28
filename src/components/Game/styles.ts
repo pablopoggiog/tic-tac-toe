@@ -3,8 +3,10 @@ import styled, { keyframes, css } from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   gap: 8vh;
+  background-color: ${({ theme }) => theme.background};
+  transition: 1s;
 
   @media (max-aspect-ratio: 3/4) {
     justify-content: space-evenly;
