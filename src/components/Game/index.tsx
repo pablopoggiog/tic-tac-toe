@@ -20,7 +20,7 @@ export const Game = () => {
 
   const [winner, setWinner] = useState<Turn>(null);
 
-  const [animation, setAnimation] = useState<string | null>(null);
+  const [animation, setAnimation] = useState<string>("");
 
   const [squares, setSquares] = useState<SquaresState>(
     JSON.parse(JSON.stringify(initialState)) // i have to use these 2 JSON methods to pass a full new objet as initial state,
@@ -31,7 +31,7 @@ export const Game = () => {
       setAnimation("tie");
 
       setTimeout(() => {
-        setAnimation(null);
+        setAnimation("");
       }, 4500);
     }
   }, [turn]);
@@ -40,7 +40,7 @@ export const Game = () => {
     setAnimation("reset");
 
     setTimeout(() => {
-      setAnimation(null);
+      setAnimation("");
     }, 4500);
 
     setWinner(null);
@@ -81,7 +81,7 @@ export const Game = () => {
       setAnimation("winner");
 
       setTimeout(() => {
-        setAnimation(null);
+        setAnimation("");
       }, 4500);
     }
 
