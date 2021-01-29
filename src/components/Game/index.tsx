@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from "react";
-import { Board, Toggler, SocialMedia } from "..";
+import { Board, Toggler, SocialMedia, Animation } from "..";
 import { SquaresState, Turn, initialState, checkWinner } from "../../lib";
-import { Container, Button, Animation, Icon } from "./styles";
+import { Container, Button } from "./styles";
 
 interface GameProps {
   toggleTheme: () => void;
@@ -81,17 +81,7 @@ export const Game: FunctionComponent<GameProps> = ({ toggleTheme }) => {
   return (
     <Container>
       <Toggler toggleTheme={toggleTheme} />
-      <Animation active={!!animation}>
-        <Icon>🎈</Icon>
-        {animation === "winner" ? (
-          <p> PLAYER {winner} WON </p>
-        ) : animation === "tie" ? (
-          <p> GAME TIED! </p>
-        ) : (
-          <p> LET'S PLAY! </p>
-        )}
-        <Icon>🥳</Icon>
-      </Animation>
+      <Animation animation={animation} winner={winner} />
       <Board handleClick={handleClick} disabled={!!winner} squares={squares} />
 
       <Button onClick={resetGame}>New Game</Button>
