@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from "react";
 import { ThemeProvider } from "styled-components";
-import { Game } from "src/components";
+import { Game } from "src/containers";
 import { ThemeType } from "src/lib";
 import { lightTheme, darkTheme } from "src/theme";
 
