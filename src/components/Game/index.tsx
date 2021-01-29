@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { useGame } from "src/hooks";
+import { useGame, useBot } from "src/hooks";
 import { Board, Toggler, SocialMedia, Animation } from "..";
 import { Container, Button } from "./styles";
 
@@ -9,6 +9,7 @@ interface GameProps {
 
 export const Game: FunctionComponent<GameProps> = ({ toggleTheme }) => {
   const { animation, winner, squares, handleClick, resetGame } = useGame();
+  useBot(squares);
 
   return (
     <Container>

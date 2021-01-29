@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { Container, InnerContainer, Square } from "./styles";
-import { SquaresState } from "../../lib";
+import { squaresType } from "../../lib";
 
 interface BoardProps {
   handleClick: (index: number) => void;
-  squares: SquaresState;
+  squares: squaresType;
   disabled: boolean;
 }
 

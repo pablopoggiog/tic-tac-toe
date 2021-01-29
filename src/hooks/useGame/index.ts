@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SquaresState, Turn, initialState, checkWinner } from "src/lib";
+import { squaresType, Turn, initialState, checkWinner } from "src/lib";
 
 export const useGame = () => {
   const [turn, setTurn] = useState<number>(0);
@@ -8,7 +8,7 @@ export const useGame = () => {
 
   const [animation, setAnimation] = useState<string>("");
 
-  const [squares, setSquares] = useState<SquaresState>(
+  const [squares, setSquares] = useState<squaresType>(
     JSON.parse(JSON.stringify(initialState)) // i have to use these 2 JSON methods to pass a full new objet as initial state,
   ); // otherwise because of the nesting levels it'll have weird behaviours muting initialState const value during the app usage
 
@@ -16,18 +16,18 @@ export const useGame = () => {
     if (!squares[index].selected) {
       setTurn(turn + 1);
 
-      const newSquares = { ...squares };
+      const newSquares = [...squares];
 
       newSquares[index].flip = true;
 
       newSquares[index].selected = turn % 2 ? "X" : "O";
 
-      setSquares({ ...newSquares });
+      setSquares([...newSquares]);
 
       setTimeout(() => {
         newSquares[index].flip = false;
 
-        setSquares({ ...newSquares });
+        setSquares([...newSquares]);
       }, 2000);
     }
   };

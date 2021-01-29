@@ -1,6 +1,6 @@
-import { SquaresState } from "..";
+import { squaresType } from "..";
 
-export const checkWinner = (squares: SquaresState) => {
+export const checkWinner = (squares: squaresType) => {
   if (
     squares[0].selected &&
     squares[0].selected === squares[1].selected &&
