@@ -10,7 +10,7 @@ export const Container = styled.div<{ active: boolean }>`
   animation: ${({ active }) =>
     active
       ? css`
-          ${popUp} 2s ease 0s 2 alternate
+          ${popUp} 1.2s ease 0s 2 alternate
         `
       : ""};
   z-index: ${({ active }) => (active ? 1 : 0)};
