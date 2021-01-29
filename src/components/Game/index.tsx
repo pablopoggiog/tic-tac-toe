@@ -1,19 +1,7 @@
 import React, { useState, FunctionComponent } from "react";
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  FacebookIcon,
-  TwitterIcon,
-} from "react-share";
-import { Board, Toggler } from "..";
+import { Board, Toggler, SocialMedia } from "..";
 import { SquaresState, Turn, initialState, checkWinner } from "../../lib";
-import {
-  Container,
-  SocialMediaContainer,
-  Button,
-  Animation,
-  Icon,
-} from "./styles";
+import { Container, Button, Animation, Icon } from "./styles";
 
 interface GameProps {
   toggleTheme: () => void;
@@ -108,20 +96,7 @@ export const Game: FunctionComponent<GameProps> = ({ toggleTheme }) => {
 
       <Button onClick={resetGame}>New Game</Button>
 
-      <SocialMediaContainer>
-        <FacebookShareButton
-          url="https://pablopoggiog.github.io/tic-tac-toe"
-          quote="This is a pretty good game, check it out!"
-        >
-          <FacebookIcon size={32} round />
-        </FacebookShareButton>
-        <TwitterShareButton
-          url="https://pablopoggiog.github.io/tic-tac-toe"
-          title="This is a pretty good game, check it out!"
-        >
-          <TwitterIcon size={32} round />
-        </TwitterShareButton>
-      </SocialMediaContainer>
+      <SocialMedia />
     </Container>
   );
 };
