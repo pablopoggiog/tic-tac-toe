@@ -78,5 +78,7 @@ export const useGame = () => {
     squares,
     handleClick,
     resetGame,
+    playSquare,
+    turn,
   };
 };

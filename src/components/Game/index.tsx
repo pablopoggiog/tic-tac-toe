@@ -8,8 +8,15 @@ interface GameProps {
 }
 
 export const Game: FunctionComponent<GameProps> = ({ toggleTheme }) => {
-  const { animation, winner, squares, handleClick, resetGame } = useGame();
-  useBot(squares);
+  const {
+    animation,
+    winner,
+    squares,
+    handleClick,
+    resetGame,
+    turn,
+  } = useGame();
+  useBot(squares, turn, handleClick);
 
   return (
     <Container>
