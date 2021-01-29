@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Turn } from "../../lib";
+import { Turn } from "src/lib";
 import { Container, Icon } from "./styles";
 
 interface AnimationProps {

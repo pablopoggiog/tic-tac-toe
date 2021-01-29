@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
+import { useGame } from "src/hooks";
 import { Board, Toggler, SocialMedia, Animation } from "..";
-import { useGame } from "../../hooks";
 import { Container, Button } from "./styles";
 
 interface GameProps {

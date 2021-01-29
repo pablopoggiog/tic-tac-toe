@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SquaresState, Turn, initialState, checkWinner } from "../../lib";
+import { SquaresState, Turn, initialState, checkWinner } from "src/lib";
 
 export const useGame = () => {
   const [turn, setTurn] = useState<number>(0);

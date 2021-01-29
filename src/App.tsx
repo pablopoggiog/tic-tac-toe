@@ -1,8 +1,8 @@
 import React, { useState, FunctionComponent } from "react";
 import { ThemeProvider } from "styled-components";
-import { Game } from "./components";
-import { ThemeType } from "./lib";
-import { lightTheme, darkTheme } from "./theme";
+import { Game } from "src/components";
+import { ThemeType } from "src/lib";
+import { lightTheme, darkTheme } from "src/theme";
 
 const App: FunctionComponent = () => {
   const [theme, setTheme] = useState<ThemeType>("dark");
