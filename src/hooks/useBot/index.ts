@@ -12,7 +12,6 @@ export const useBot = (squares: squaresType, turn: any, handleClick: any) => {
   const play = () => setTimeout(() => chooseAnEmptySquare(), 2000);
 
   useEffect(() => {
-    console.log(turn);
     turn % 2 && turn < 9 && play();
   }, [turn]);
 };

@@ -10,16 +10,17 @@ export const useGame = () => {
 
   const [squares, setSquares] = useState<squaresType>(
     JSON.parse(JSON.stringify(initialState)) // i have to use these 2 JSON methods to pass a full new objet as initial state,
-  ); // otherwise because of the nesting levels it'll have weird behaviours muting initialState const value during the app usage
+  ); // otherwise b/c of the nesting levels it'll have weird behaviours mutating initialState const value during the app usage
 
   const playSquare = (index: number) => {
+    // checks before that the square isnt used yet
     if (!squares[index].selected) {
       setTurn(turn + 1);
-
+      // creates a new instance
       const newSquares = [...squares];
 
       newSquares[index].flip = true;
-
+      // depending on the turn, the square will draw and X or an O
       newSquares[index].selected = turn % 2 ? "X" : "O";
 
       setSquares([...newSquares]);
@@ -33,10 +34,12 @@ export const useGame = () => {
   };
 
   const handleClick = (index: number) => {
+    // if there isnt a winner yet, flips a square
     !winner && playSquare(index);
 
     const someoneWon = checkWinner(squares);
 
+    // checks for a winner
     if (someoneWon) {
       setWinner(someoneWon);
 
@@ -46,8 +49,8 @@ export const useGame = () => {
         setAnimation("");
       }, 4500);
     }
-
-    if (turn === 9) {
+    // checks if there is a tied game
+    else if (turn === 9) {
       setAnimation("tie");
 
       setTimeout(() => {
